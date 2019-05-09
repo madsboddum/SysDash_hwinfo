@@ -1,0 +1,46 @@
+[MeasureDriveTotal1]
+Measure=FreeDiskSpace
+Drive=#Drive1#
+Total=1
+UpdateDivider=5
+Substitute="G":"GB"
+[MeasureDriveFree1]
+Measure=FreeDiskSpace
+Drive=#Drive1#
+UpdateDivider=5
+Substitute="G":"GB"
+[MeasureDriveUsed1]
+Measure=FreeDiskSpace
+Drive=#Drive1#
+UpdateDivider=5
+InvertMeasure=1
+Substitute="G":"GB"
+[MeasureDriveCalc1]
+Measure=Calc
+Formula=[MeasureDriveUsed1:%]
+MinValue=0
+MaxValue=100
+DynamicVariables=1
+UpdateDivider=5
+[MeterDriveLetter1]
+Meter=String
+MeterStyle=StylePrimary
+X=(#Margin#*#Scale#)
+Y=(17*#Scale#)R
+Text=#Drive1#
+LeftMouseDownAction=["#Drive1#"]
+[MeterDriveValue1]
+Meter=String
+MeterStyle=StyleSecondary | MeterDriveValueStyle
+MeasureName=MeasureDriveFree1
+MeasureName2=MeasureDriveTotal1
+X=((#Width#+#Margin#)*#Scale#)
+Y=0r
+[MeterDriveBar1]
+Meter=Shape
+X=(#Margin#*#Scale#)
+Y=(-7*#Scale#)R
+Shape=Rectangle 0,0,(#Width#*#Scale#),(4*#Scale#),(2*#Scale#) | Fill Color #MainColor#,50 | StrokeWidth 0
+Shape2=Rectangle 0,0,((#Width#*#Scale#)*([MeasureDriveCalc1:%]/100)),(4*#Scale#),(2*#Scale#) | Fill Color #MainColor#,245 | StrokeWidth 0
+DynamicVariables=1
+UpdateDivider=10
